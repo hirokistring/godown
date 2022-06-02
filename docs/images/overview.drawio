@@ -1,0 +1,52 @@
+<mxfile host="65bd71144e">
+    <diagram id="et6ZL5nDRBVg1DVwjbSL" name="ページ1">
+        <mxGraphModel dx="608" dy="559" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="19" value="" style="rounded=0;whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=#000000;sketch=0;fontFamily=JetBrains Mono;fontSize=14;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="40" width="720" height="440" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=JetBrains Mono;fontSize=14;fontColor=#FFFFFF;strokeWidth=2;" parent="1" source="2" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#000000;shadow=1;arcSize=4;glass=0;sketch=0;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="80" width="290" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="group;aspect=fixed;" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="136" y="94" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;shadow=0;glass=0;sketch=0;fillColor=#FF540A;strokeColor=none;" parent="8" vertex="1">
+                    <mxGeometry width="14.906832298136644" height="14.906832298136644" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;shadow=0;glass=0;sketch=0;fillColor=#FFCA1C;strokeColor=none;" parent="8" vertex="1">
+                    <mxGeometry x="22.360248447204967" width="14.906832298136644" height="14.906832298136644" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;shadow=0;glass=0;sketch=0;fillColor=#00B800;strokeColor=none;" parent="8" vertex="1">
+                    <mxGeometry x="45.09316770186335" width="14.906832298136644" height="14.906832298136644" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="&lt;h1 style=&quot;font-size: 14px&quot;&gt;$ cat hello.go.md&lt;/h1&gt;&lt;div&gt;&lt;font color=&quot;#00cc00&quot;&gt;#&lt;/font&gt;&amp;nbsp;&lt;font color=&quot;#ffca1c&quot;&gt;hello.go&lt;/font&gt;&lt;/div&gt;&lt;h1 style=&quot;font-size: 14px&quot;&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;```&lt;/span&gt;&lt;br&gt;&lt;/h1&gt;&lt;div&gt;package main&lt;/div&gt;&lt;div&gt;import &quot;fmt&quot;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#ffca1c&quot;&gt;const WHO&lt;/font&gt;&amp;nbsp;= &quot;godown&quot;&lt;/div&gt;&lt;div&gt;```&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#00b800&quot;&gt;##&lt;/font&gt;&amp;nbsp;&lt;font color=&quot;#ffca1c&quot;&gt;func main&lt;/font&gt;&lt;/div&gt;&lt;div&gt;```&lt;/div&gt;&lt;div&gt;fmt.Printf(&quot;&lt;font color=&quot;#00ffff&quot;&gt;Hello %s!&quot;&lt;/font&gt;,&lt;font color=&quot;#00cccc&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;font color=&quot;#ffca1c&quot;&gt;WHO&lt;/font&gt;)&lt;br&gt;&lt;/div&gt;&lt;div&gt;```&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;sketch=0;fontFamily=JetBrains Mono;fontSize=14;fontColor=#FFFFFF;labelBackgroundColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="150" width="260" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#000000;shadow=1;arcSize=4;glass=0;sketch=0;" parent="1" vertex="1">
+                    <mxGeometry x="460" y="80" width="300" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="group;aspect=fixed;" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="476" y="94" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;shadow=0;glass=0;sketch=0;fillColor=#FF540A;strokeColor=none;" parent="13" vertex="1">
+                    <mxGeometry width="14.906832298136644" height="14.906832298136644" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;shadow=0;glass=0;sketch=0;fillColor=#FFCA1C;strokeColor=none;" parent="13" vertex="1">
+                    <mxGeometry x="22.360248447204967" width="14.906832298136644" height="14.906832298136644" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;shadow=0;glass=0;sketch=0;fillColor=#00B800;strokeColor=none;" parent="13" vertex="1">
+                    <mxGeometry x="45.09316770186335" width="14.906832298136644" height="14.906832298136644" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="&lt;h1 style=&quot;font-size: 14px&quot;&gt;$ godown run hello.go&lt;/h1&gt;&lt;div&gt;&lt;font color=&quot;#00ffff&quot;&gt;Hello, godown!&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;sketch=0;fontFamily=JetBrains Mono;fontSize=14;fontColor=#FFFFFF;labelBackgroundColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="150" width="260" height="240" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

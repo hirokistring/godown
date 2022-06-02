@@ -1,0 +1,66 @@
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod download
+builds:
+  - binary: godown
+    id: godown
+    #main: main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
+  - binary: godown
+    id: macos
+    #main: main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    hooks:
+      post:
+        - cmd: gon .gon.hcl
+          output: true # always print command output, otherwise only visible in debug mode
+
+checksum:
+  disable: true
+
+archives:
+  - id: archive
+    format: tar.gz # default
+    wrap_in_directory: true
+    replacements:
+      darwin: macos
+      386: i386
+      amd64: x86_64
+    files:
+      - LICENSE
+      - README.md
+      - docs/*
+    format_overrides:
+      - goos: windows
+        format: zip      
+      - goos: darwin
+        format: zip      
+
+release:
+  ids:
+    - archive
+  footer: |
+    **Full Changelog**: https://github.com/hirokistring/godown/compare/{{ .PreviousTag }}...{{ .Tag }}
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
