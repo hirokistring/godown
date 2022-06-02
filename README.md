@@ -95,4 +95,8 @@ Threfore, you can use the almost all command line options of the `go` command.
 
 ## How to install
 
-Download and extract the `godown` executable file from the [Releases](https://github.com/hirokistring/godown/releases) page.
+```
+go install github.com/hirokistring/godown
+```
+
+Or, download and extract the `godown` executable file from the [Releases](https://github.com/hirokistring/godown/releases) page.
