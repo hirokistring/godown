@@ -19,7 +19,7 @@ import (
 
 ```go
 const (
-	VERSION           = "0.0.1"
+	VERSION           = "0.0.2"
 	ENV_GO_COMMAND    = "GODOWN_GO_COMMAND"
 	ENV_GOFMT_COMMAND = "GODOWN_GOFMT_COMMAND"
 	GO_COMMAND        = "go"
