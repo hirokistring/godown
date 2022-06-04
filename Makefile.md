@@ -23,8 +23,11 @@ especially on MacOS. Then, type:
 
 This generates `*.go` from `*.md`.
 
+The debug logs are saved in `verbose.log`.
+Check it out.
+
 ```sh
-./godown
+./godown --verbose 2&> verbose.log
 ```
 
 ## `diff:`
@@ -32,12 +35,8 @@ This generates `*.go` from `*.md`.
 Compare the generated `*.go` and `*.go.expected` files.
 
 ```sh
-GOFILES=$$(ls -1 ./*.go)
-for GOFILE in $${GOFILES}
-do
-  @echo "Comparing " $${GOFILE} "and" $${GOFILE}.expected
-  diff $${GOFILE} $${GOFILE}.expected
-done
+diff godown.go godown.go.expected || true
+diff main.go main.go.expected || true
 ```
 
 ## How to just `build:`

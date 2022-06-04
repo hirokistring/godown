@@ -341,13 +341,15 @@ func isCodeBlockUnderHeadingWithFunc(node *blackfriday.Node) (bool, string, stri
 	defer minusIndent()
 
 	if node.Type == blackfriday.CodeBlock {
-		recipes := string(node.Literal)
+		if string(node.CodeBlockData.Info) == "go" {
+			recipes := string(node.Literal)
 
-		// Find sibling of Heading with func
-		headingFound, funcspec := findSiblingHeadingWithFunc(node)
-		if headingFound {
+			// Find sibling of Heading with func
+			headingFound, funcspec := findSiblingHeadingWithFunc(node)
+			if headingFound {
 
-			return true, funcspec, recipes
+				return true, funcspec, recipes
+			}
 		}
 	}
 	return false, "", ""
@@ -358,12 +360,14 @@ func isCodeBlockUnderHeadingWithGo(node *blackfriday.Node) (bool, string, string
 	defer minusIndent()
 
 	if node.Type == blackfriday.CodeBlock {
-		recipes := string(node.Literal)
+		if string(node.CodeBlockData.Info) == "go" {
+			recipes := string(node.Literal)
 
-		// Find sibling of Heading with *.go
-		headingFound, gofilespec := findSiblingHeadingWithGo(node)
-		if headingFound {
-			return true, gofilespec, recipes
+			// Find sibling of Heading with *.go
+			headingFound, gofilespec := findSiblingHeadingWithGo(node)
+			if headingFound {
+				return true, gofilespec, recipes
+			}
 		}
 	}
 	return false, "", ""
@@ -394,9 +398,14 @@ func godownWalker(buff *strings.Builder, funcspecs *[]string, fmterr *error) bla
 				isCodeBlockUnderHeadingWithFunc, _, codes := isCodeBlockUnderHeadingWithFunc(node)
 				if isCodeBlockUnderHeadingWithFunc {
 					// open curly braces
-					foundCodeBlockBeforeHeading, _ := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, true, blackfriday.Heading) // find backword
+					foundCodeBlockBeforeHeading, siblingCodeBlock := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, true, blackfriday.Heading) // find backword
+					// the found sibling CodeBlock must be go CodeBlock
+					if foundCodeBlockBeforeHeading {
+						if siblingCodeBlock.CodeBlockData.Info == nil || string(siblingCodeBlock.CodeBlockData.Info) != "go" {
+							foundCodeBlockBeforeHeading = false
+						}
+					}
 					if !foundCodeBlockBeforeHeading {
-
 						if !hasSiblingListWithBeforeHeading(node, true, "parameters") && !hasSiblingListWithBeforeHeading(node, true, "returns") {
 							// there is no parameter
 							log.Printf("%sThere is no parameters and returns between Heading and CodeBlock. () is appended.", indent())
@@ -411,7 +420,13 @@ func godownWalker(buff *strings.Builder, funcspecs *[]string, fmterr *error) bla
 					fmt.Fprintf(buff, "%s", codes)
 
 					// close curly braces
-					foundCodeBlockAfter, _ := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, false, blackfriday.Heading) // find forward
+					foundCodeBlockAfter, siblingCodeBlock := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, false, blackfriday.Heading) // find forward
+					// the found sibling CodeBlock must be go CodeBlock
+					if foundCodeBlockAfter {
+						if siblingCodeBlock.CodeBlockData.Info == nil || string(siblingCodeBlock.CodeBlockData.Info) != "go" {
+							foundCodeBlockAfter = false
+						}
+					}
 					if !foundCodeBlockAfter {
 						// This code block is the last code block under heading with ".go"
 						fmt.Fprintf(buff, "}\n\n")

@@ -3,15 +3,11 @@
 .ONESHELL:
 
 generate:
-	./godown
+	./godown --verbose 2&> verbose.log
 	
 diff:
-	GOFILES=$$(ls -1 ./*.go)
-	for GOFILE in $${GOFILES}
-	do
-	  @echo "Comparing " $${GOFILE} "and" $${GOFILE}.expected
-	  diff $${GOFILE} $${GOFILE}.expected
-	done
+	diff godown.go godown.go.expected || true
+	diff main.go main.go.expected || true
 	
 build:
 	go build

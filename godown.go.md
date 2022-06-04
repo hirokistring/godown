@@ -86,7 +86,7 @@ var spaces string = "                    " // 10 levels
 
 ### func `isHeadingWithGo`
 
-Heading like, `# main.go - xxxxx, xxxx` that ends with `.go` suffix.
+Heading like, `# main.go` that ends with `.go` suffix.
 
 - parameters
   - `node *blackfriday.Node`
@@ -495,9 +495,22 @@ List Item like, `- parameters` or `- returns`.
 
 ### func `isListItemUnder`
 
+Like the Item below:
+
+```
 - parameters
-  - `node *blackfriday.Node`
-  - `itemName string`
+	- `message string`
+```
+
+Note that the node structure is like below:
+
+![isListItemUnder](docs/images/isListItemUnder.png)
+
+Check the `--verbose` output for more detail.
+
+- parameters
+  - `node *blackfriday.Node` : `Item` node
+  - `itemName string` : like `parameters` or `returns`
 - returns
   - `bool`
   - `string` : paramspec
@@ -535,6 +548,18 @@ List Item like, `- parameters` or `- returns`.
 
 ### func `isCodeBlockUnderHeadingWithFunc`
 
+Like the CodeBlock below:
+
+````
+## func `sayhello`
+
+```go
+fmt.Printf("Hello, %s!\n",WHO)
+```
+````
+
+Note that the CodeBlock must be `go` CodeBlock.
+
 - parameters
   - `node *blackfriday.Node`
 - returns
@@ -547,19 +572,35 @@ List Item like, `- parameters` or `- returns`.
 	defer minusIndent()
 
 	if node.Type == blackfriday.CodeBlock {
-		recipes := string(node.Literal)
+		if string(node.CodeBlockData.Info) == "go" {
+			recipes := string(node.Literal)
 
-		// Find sibling of Heading with func
-		headingFound, funcspec := findSiblingHeadingWithFunc(node)
-		if headingFound {
+			// Find sibling of Heading with func
+			headingFound, funcspec := findSiblingHeadingWithFunc(node)
+			if headingFound {
 
-			return true, funcspec, recipes
+				return true, funcspec, recipes
+			}
 		}
 	}
 	return false, "", ""
 ```
 
 ### func `isCodeBlockUnderHeadingWithGo`
+
+Like the CodeBlock below:
+
+````
+# hello.go
+
+```go
+package main
+import "fmt"
+const WHO = "godown"
+```
+````
+
+Note that the CodeBlock must be `go` CodeBlock.
 
 - parameters
   - `node *blackfriday.Node`
@@ -573,12 +614,14 @@ List Item like, `- parameters` or `- returns`.
 	defer minusIndent()
 
 	if node.Type == blackfriday.CodeBlock {
-		recipes := string(node.Literal)
+		if string(node.CodeBlockData.Info) == "go" {
+			recipes := string(node.Literal)
 
-		// Find sibling of Heading with *.go
-		headingFound, gofilespec := findSiblingHeadingWithGo(node)
-		if headingFound {
-			return true, gofilespec, recipes
+			// Find sibling of Heading with *.go
+			headingFound, gofilespec := findSiblingHeadingWithGo(node)
+			if headingFound {
+				return true, gofilespec, recipes
+			}
 		}
 	}
 	return false, "", ""
@@ -618,9 +661,14 @@ List Item like, `- parameters` or `- returns`.
 				isCodeBlockUnderHeadingWithFunc, _, codes := isCodeBlockUnderHeadingWithFunc(node)
 				if isCodeBlockUnderHeadingWithFunc {
 					// open curly braces
-					foundCodeBlockBeforeHeading, _ := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, true, blackfriday.Heading) // find backword
+					foundCodeBlockBeforeHeading, siblingCodeBlock := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, true, blackfriday.Heading) // find backword
+					// the found sibling CodeBlock must be go CodeBlock
+					if foundCodeBlockBeforeHeading {
+						if siblingCodeBlock.CodeBlockData.Info == nil || string(siblingCodeBlock.CodeBlockData.Info) != "go" {
+							foundCodeBlockBeforeHeading = false
+						}
+					}
 					if !foundCodeBlockBeforeHeading {
-
 						if !hasSiblingListWithBeforeHeading(node, true, "parameters") && !hasSiblingListWithBeforeHeading(node, true, "returns") {
 							// there is no parameter
 							log.Printf("%sThere is no parameters and returns between Heading and CodeBlock. () is appended.", indent())
@@ -635,7 +683,13 @@ List Item like, `- parameters` or `- returns`.
 					fmt.Fprintf(buff, "%s", codes)
 
 					// close curly braces
-					foundCodeBlockAfter, _ := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, false, blackfriday.Heading) // find forward
+					foundCodeBlockAfter, siblingCodeBlock := findSiblingWithTypeBefore(node, blackfriday.CodeBlock, false, blackfriday.Heading) // find forward
+					// the found sibling CodeBlock must be go CodeBlock
+					if foundCodeBlockAfter {
+						if siblingCodeBlock.CodeBlockData.Info == nil || string(siblingCodeBlock.CodeBlockData.Info) != "go" {
+							foundCodeBlockAfter = false
+						}
+					}
 					if !foundCodeBlockAfter {
 						// This code block is the last code block under heading with ".go"
 						fmt.Fprintf(buff, "}\n\n")
